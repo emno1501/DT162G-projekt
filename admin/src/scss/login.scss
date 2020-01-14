@@ -49,6 +49,8 @@ table {
 }
 /*SLUT RESET*/
 
+//////// Regler för Logga in-sidan ////////
+
 // Variabler mixins och selector inheritances
 // Färger
 $my-yellow: #FFEB31;
@@ -72,12 +74,11 @@ $my-yellow: #FFEB31;
 
 ///////////////////////////////////////////////////////////
 
-body {
-    background-color: lighten($my-yellow, 10);
-}
-
 html {
     font-size: 62.5%;
+    body {
+        background-color: lighten($my-yellow, 10);
+    }
     #logo {
         width: 300px;
         margin: 50px auto 0 auto;

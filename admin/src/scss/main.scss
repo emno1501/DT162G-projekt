@@ -49,6 +49,8 @@ table {
 }
 /*SLUT RESET*/
 
+////////// Regler för admin-gränssnitt ///////////
+
 // Variabler
 //Färger
 $my-yellow: #FFEB31;
@@ -111,7 +113,7 @@ html {
         margin-bottom: 20px;
         text-align: center;
     }
-    #addBox, #recipesBox {
+    #addBox, #recipesBox { // Regler för box med lägga till-formulär och box med alla recept
         width: 100%;
         margin: 50px auto;
         form {
@@ -197,7 +199,7 @@ html {
             }
         }
     }
-    #recipesBox {
+    #recipesBox { // Regler som bara gäller box med alla recept
         form {
             background-color: rgb(236, 236, 236);
             margin-bottom: 20px;
@@ -290,13 +292,6 @@ html {
             top: 15px;
         }
     }
-}
-
-@include mediaQueries(970px, 761px) { //Regler för tabletskärmar
-    
-}
-@include mediaQueries(760px) { //Regler för mobilskärmar
-    
 }
 
 

@@ -11,16 +11,17 @@
 </head>
 <body>
     <!-- Utvecklingsversion -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <!-- Produktionsversion -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <div id="app">
         <button type="button" v-on:click="logout" id="logoutBtn">Logga ut</button>
         <div id="logo"><img src="images/logo.svg" /></div>
+
         <div id="addBox">
             <h2>Lägg till recept</h2>
-            <form>
-                <div>
+            <form> <!-- Formulär med fält för att lägga till recept -->
+                <div> <!-- Inputfälten är kopplade till Vue-instansen,så att värdena lagras i Vues "data" -->
                     <label>Receptnamn<input type="text" v-model="new_recipename" /></label>
                     <label>Tid<input type="number" v-model="new_time" /></label>
                     <label>Portioner<input type="number" v-model="new_portions" /></label>
@@ -37,8 +38,8 @@
         </div>
         <div id="recipesBox">
             <h2>Alla recept</h2>
-            <form v-for="recipe in recipeList">
-                <div>
+            <form v-for="recipe in recipeList"> <!-- Formulär med fält som innehåller vardera recepts information -->
+                <div>                           <!-- Ett nytt formulär skapas för varje recept som finns i arrayen recipeList -->
                     <label>Receptnamn<input type="text" v-model="recipe.recipeName" /></label>
                     <label>Tid<input type="number" v-model.number="recipe.time" /></label>
                     <label>Portioner<input type="number" v-model.number="recipe.portions" /></label>
@@ -49,11 +50,15 @@
                 </div>
                 <div>
                     <label>Instruktion<textarea v-model="recipe.instruction"></textarea></label>
-                    <button type="button" v-on:click="del(recipe._id)" class="deleteBtn">Ta bort</button>
+                    <button type="button" v-on:click="del(recipe._id)" class="deleteBtn">Ta bort</button> <!-- Knapp som vid klick anropar Vue-metoden del och skickar med recept-id:t för att ta bort receptet -->
+                    <!-- Knapp som vid klick anropar Vue-metoden upd som uppdaterar receptet. Receptets id kopplas till knappens id. -->
+                    <!-- Innehållet i inputfälten som hör till receptet lagras i uppdatera-knappens value-attribut för att enkelt kunna hämtas av upd-metoden -->
                     <button type="button" v-bind:id="recipe._id" v-on:click="upd" class="updateBtn" v-bind:value="recipe.recipeName + '|' + recipe.ingredients + '|' + recipe.instruction + '|' + recipe.time + '|' + recipe.portions + '|' + recipe.image">
                         Uppdatera
                     </button>
                 </div>
+                <!-- Element som vid klick på anropar Vue-metod som möjligör att fälla ned och upp 
+                    formuläret med receptinformationen för varje recept-->
                 <p v-bind:class="recipe._id" class="readmore" v-on:click="readMore">Visa mer</p>
             </form>
         </div>

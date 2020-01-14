@@ -11,18 +11,19 @@
 </head>
 <body>
     <!-- Utvecklingsversion -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <!-- Produktionsversion -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    
     <div id="logo"><img src="images/logo.svg" /></div>
     <div id="login">
         <h1>Logga in</h1>
-        <form>
+        <form> <!-- Formulär med fält för att logga in till admin-gränssnittet -->
             <input type="text" v-model="input_username" />
-            <input type="password" v-model="input_password" v-on:change="getData" />
+            <input type="password" v-model="input_password" />
             <button type="button" v-on:click="log_in">Logga in</button>
         </form>
-        <p class="message">{{message}}</p>
+        <p class="message">{{message}}</p> <!-- Felmeddelanden skrivs ut i denna -->
     </div>
    <script src="login.js"></script>
 </body>

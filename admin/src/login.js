@@ -3,6 +3,7 @@
 //URL till webbtjänst
 let loginurl = "https://sleepy-tundra-34734.herokuapp.com/login";
 
+// Ny instans av Vue
 let login = new Vue({
     el: '#login',
     data: {
@@ -13,53 +14,27 @@ let login = new Vue({
         message: ""
         
     },
+    created() {
+        this.getData();
+    },
     methods: {
-        getData: function(event) {
+        getData: function() { // Hämtar användarnamn och lösenord som finns lagrat i databasen
             fetch(loginurl+"/get")
             .then((res) => res.json())
-            .then((data) => {
+            .then((data) => { // Lagrar hämtade datan i variabler i Vue:s data
                 this.username = data[0].username;
                 this.password = data[0].password;   
             })
             .catch((err) => console.log(err));
         },
-        log_in: function(event) {
+        log_in: function(event) { // Kontrollerar användarnamn och lösen från inloggningsformuläret och 
+                                // loggar in användare om dessa stämmer överens med inloggningsuppgifterna hämtade från databasen
             if (this.username == this.input_username && this.password == this.input_password) {
                 localStorage.setItem("username", this.username);
                 location.replace("admin.html");
             } else {
-                this.message = "Användarnamn eller lösenord är felaktigt";
+                this.message = "Användarnamn eller lösenord är felaktigt"; // Felmeddelande
             }
-            
-                /* console.log("input: " + this.input_username);
-                console.log("data: " + this.username);
-                console.log("local storage: " + localStorage.getItem("username")); */
-        },
-        upd: function(event) {
-            
-            let updValueArr = event.target.value.split(", ");
-            let ingredients = updValueArr[1].replace("[", "").replace("]", "");
-            let instruction = updValueArr[2].replace("[", "").replace("]", "");
-            let ob = {};
-            ob.recipeName = updValueArr[0];
-            ob.ingredients = ingredients.split(",\n");
-            ob.instruction = instruction.split("\n");
-            ob.time = parseInt(updValueArr[3]);
-            ob.portions = parseInt(updValueArr[4]);
-            ob.image = updValueArr[5];
-
-            let jsonStr = JSON.stringify(ob);
-
-            fetch(loginurl+"/update/" + event.target.id, { //Lägger till IDt till url:en
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: jsonStr
-            })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
         }
     }
 });
