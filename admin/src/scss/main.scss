@@ -1,0 +1,302 @@
+//RESET
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*SLUT RESET*/
+
+// Variabler
+//Färger
+$my-yellow: #FFEB31;
+$my-pink: #FFE9F1;
+
+//Mixins och selector inheritances
+@mixin mediaQueries($arg...) {
+    @if length($arg) == 1 {
+        @media screen and (max-width: nth($arg, 1)) {
+            @content;
+        }
+    } @else if length($arg) == 2 {
+        @media screen and (max-width: nth($arg, 1)) and (min-width: nth($arg, 2)) {
+            @content;
+        }
+    }
+}
+%font {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.3em;
+}
+%headingfont {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+html {
+    font-size: 62.5%;
+    #logoutBtn {
+        margin: 15px 0 0 15px;
+        border: none;
+        background-color: red;
+        color: white;
+        @extend %font;
+        @extend %headingfont;
+        font-size: 1.3rem;
+        padding: 7px 15px;
+        cursor: pointer;
+    }
+    #logoutBtn:hover {
+        background-color: black;
+    }
+    #logo {
+        width: 200px;
+        margin: 0 auto;
+        position: relative;
+        top: -20px;
+        img {
+            width: 200px;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    h2 {
+        @extend %font;
+        @extend %headingfont;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    #addBox, #recipesBox {
+        width: 100%;
+        margin: 50px auto;
+        form {
+            width: 900px;
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: $my-pink;
+            @extend %font;
+            overflow: auto;
+        }
+        div {
+            float: left;
+        }
+        div:nth-child(1), div:nth-child(2) {
+            width: 27%;
+            margin-right: 2%;
+        }
+        div:nth-child(3) {
+            width: 42%;
+            overflow: auto;
+            textarea, button {
+                float: right;
+            }
+        }
+        input, textarea {
+            display: block;
+            padding: 3px 1%;
+            width: 97.5%;
+            @extend %font;
+            line-height: 1.6em;
+        }
+        textarea {
+            height: 135px;
+        }
+        label {
+            span {
+                font-size: 1rem;
+            }
+        }
+        img {
+            width: 100px;
+            height: auto;
+        }
+        button {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            border: none;
+            padding: 5px 10px;
+            margin-top: 15px;
+        }
+        @include mediaQueries(660px) { //Regler för mobilskärmar
+            padding: 15px;
+            width: 350px;
+            margin: 30px auto;
+            div {
+                float: none;
+            }
+            div:nth-child(1), div:nth-child(2), div:nth-child(3) {
+                width: 99%;
+            }
+            div:nth-child(1) {
+                label:nth-child(2), label:nth-child(3) {
+                    display: inline-block;
+                    width: 48%;
+                    input {
+                        width: 99%;
+                    }
+                }
+                label:nth-child(2) {
+                    margin-right: 2%;
+                }
+            }
+            div:nth-child(2) {
+                clear: both;
+            }
+            input, textarea, img {
+                margin-bottom: 7px;
+            }
+            button {
+                width: 100%;
+            }
+        }
+    }
+    #recipesBox {
+        form {
+            background-color: rgb(236, 236, 236);
+            margin-bottom: 20px;
+            position: relative;
+            height: 25px;
+            overflow: hidden;
+            padding-bottom: 70px;
+        }
+        div:nth-child(1) {
+            label:nth-child(2), label:nth-child(3) {
+                display: inline-block;
+                width: 48%;
+                input {
+                    width: 99%;
+                }
+            }
+            label:nth-child(2) {
+                margin-right: 2%;
+            }
+        }
+        input {
+            margin-bottom: 5px;
+        }
+        textarea {
+            height: 140px;
+        }
+        button {
+            margin-left: 30px;
+            margin-top: 25px;
+            cursor: pointer;
+        }
+        .deleteBtn {
+            background-color: red;
+        }
+        .updateBtn {
+            background-color: $my-yellow;
+            color: black;
+        }
+        .deleteBtn:hover {
+            background-color: darken(red, 10);
+        }
+        .updateBtn:hover {
+            background-color: darken($my-yellow, 15);
+        }
+        .readmore {
+            position: absolute;
+            bottom: 0;
+            left: -3%;
+            text-align: center;
+            width: 103%;
+            padding: 15px 0;
+            background-color: rgba(255, 235, 49, 0.9);
+            cursor: pointer;
+            text-transform: uppercase;
+            @extend %font;
+            @extend %headingfont;
+            font-size: 1.3rem;
+        }
+        @include mediaQueries(660px) { //Regler för mobilskärmar
+            div:nth-child(1) {
+                label:nth-child(4) {
+                    overflow: auto;
+                    input {
+                        width: 46%;
+                        display: inline-block;
+                        
+                    }
+                    img {
+                        float: right;
+                        width: 45%;
+                    }
+                }
+            }
+            button {
+                width: 46%;
+                margin-left: 0;
+                padding: 5px 2%;
+                float: left;
+            }
+            .deleteBtn {
+                margin-left: 8%;
+            }
+            
+        }
+    }
+    @include mediaQueries(660px) { //Regler för mobilskärmar
+        #logo {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+    }
+}
+
+@include mediaQueries(970px, 761px) { //Regler för tabletskärmar
+    
+}
+@include mediaQueries(760px) { //Regler för mobilskärmar
+    
+}
+
+

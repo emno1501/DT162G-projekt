@@ -1,0 +1,142 @@
+//RESET
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*SLUT RESET*/
+
+// Variabler mixins och selector inheritances
+// Färger
+$my-yellow: #FFEB31;
+
+// Typsnitt
+%font {
+    font-family: "Open Sans", sans-serif;
+}
+// Mixin för media queries
+@mixin mediaQueries($arg...) {
+    @if length($arg) == 1 {
+        @media screen and (max-width: nth($arg, 1)) {
+            @content;
+        }
+    } @else if length($arg) == 2 {
+        @media screen and (max-width: nth($arg, 1)) and (min-width: nth($arg, 2)) {
+            @content;
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////
+
+body {
+    background-color: lighten($my-yellow, 10);
+}
+
+html {
+    font-size: 62.5%;
+    #logo {
+        width: 300px;
+        margin: 50px auto 0 auto;
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+    }
+    #login {
+        background-color: white;
+        max-width: 450px;
+        width: 80%;
+        padding: 25px;
+        margin: 100px auto;
+        h1 {
+            @extend %font;
+            font-weight: 700;
+            font-size: 2.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 43.5%;
+            padding: 2%;
+            margin-bottom: 15px;
+            @extend %font;
+            background-color: rgb(238, 238, 238);
+        }
+        input:nth-child(1) {
+            margin-right: 2.6%;
+        }
+        button {
+            clear: both;
+            width: 100%;
+            padding: 2%;
+            background-color: black;
+            color: white;
+            border: none;
+            @extend %font;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+        }
+        .message {
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+            @extend %font;
+        }
+        @include mediaQueries(570px) { //Regler för mobilskärmar
+            margin: 100px auto;
+            input {
+                width: 95%;
+                margin-right: 0;
+            }
+        }
+    }
+}

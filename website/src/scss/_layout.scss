@@ -1,0 +1,311 @@
+
+//selector inheritances för layout
+%margins {
+    h2 {
+        margin-bottom: 20px;
+    }
+    h3 {
+        margin-bottom: 15px;
+    }
+    p {
+        margin-bottom: 20px;
+    }
+    article {
+        margin-bottom: 20px;
+    }
+}
+
+//Webbplatsens uppbyggnad
+header {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px 0;
+    z-index: 10;
+    overflow: auto;
+    #logo {
+        width: 200px;
+        height: auto;
+        margin-left: 35px;
+        float: left;
+        img {
+            width: 100%;
+            height: auto;
+        }
+        @include mediaQueries(760px) { //Regler för mobilskärmar
+            margin: 0 auto;
+            float: none;
+        }
+    }
+}
+.headerBackground { // Ändrar färg på header vid scroll
+    background-color: rgba(255, 233, 241, 0.8);
+    box-shadow: 0 10px 10px rgba(255, 233, 241, 0.8);
+}
+nav { //Huvudmeny
+    @extend %nav;
+    float: left;
+    margin-top: 15px;
+    margin-left: 40px;
+    @include mediaQueries(760px) { //Regler för mobilskärmar
+        float: none;
+        margin: 15px auto 0 auto;
+        text-align: center;
+    }
+}
+//Startsektion
+.startcontainer {
+    width: 90%;
+    padding: 83px 0 0 10%;
+    height: 350px;
+    background-image: url("../pics/background3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    h1 {
+        margin-top: 80px;
+        margin-bottom: 15px;
+        width: 90%;
+    }
+    p {
+        margin-bottom: 35px;
+        text-shadow: 0 0 5px lightgray;
+    }
+    a {
+        @extend %button;
+    }
+    a:hover {
+        @extend %buttonhover;
+    }
+    @include mediaQueries(970px, 761px) { //Regler för tabletskärmar
+        height: 300px;
+        h1 {
+            margin-top: 50px;
+        }
+    }
+    @include mediaQueries(760px) { //Regler för mobilskärmar
+        h1 {
+            width: 250px;
+        }
+        p {
+            max-width: 80%;
+        }
+    }
+}
+// Om oss-sektionen
+.about {
+    width: 100%;
+    padding: 80px 0;
+    text-align: center;
+    background-color: $my-pink;
+    @extend %margins;
+    p {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    @include mediaQueries(760px) { //Regler för mobilskärmar
+        p {
+            max-width: 80%;
+        }
+    }
+}
+// Sektion för senaste recepten
+.latest {
+    width: 80%;
+    margin: 0 auto;
+    padding: 50px 0 100px 0;
+    overflow: auto;
+    position: relative;
+    h2 {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .latestrecipe {
+        max-width: 35.2%;
+        border: 4px solid black;
+        padding: 3% 3% 65px 3%;
+        float: left;
+        margin: 0 4% 20px 4%;
+        height: 450px;
+        overflow: hidden;
+        position: relative;
+        img {
+            margin-bottom: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+        ul {
+            columns: 2;
+            clear: both;
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-left: 15px;
+        }
+        .readmore {
+            position: absolute;
+            bottom: -5%;
+            left: -3%;
+            text-align: center;
+            width: 103%;
+            padding: 25px 0;
+            background-color: rgba(255, 235, 49, 0.8);
+            cursor: pointer;
+            text-transform: uppercase;
+            @extend %heading-font;
+            font-size: 1.3rem;
+        }
+        @include mediaQueries(970px, 761px) { //Regler för tabletskärmar
+            max-width: 38.8%;
+            margin: 0 2% 20px 2%;
+        }
+        @include mediaQueries(760px) { //Regler för mobilskärmar
+            max-width: 94%;
+            border: 4px solid black;
+            float: none;
+            margin: 0 0 20px 0;
+            height: 450px;
+            overflow: hidden;
+            position: relative;
+        }
+    }
+    h3 {
+        text-align: center;
+    }
+    @extend %margins;
+    .button {
+        width: 100%;
+        position: absolute;
+        bottom: 60px;
+        div {
+            width: 151px;
+            margin: 0 auto;
+        }
+    }
+    a {
+        @extend %button;
+    }
+    a:hover {
+        @extend %buttonhover;
+    }
+    @include mediaQueries(970px, 761px) { //Regler för tabletskärmar
+        width: 90%;
+    }
+}
+.time { // Div med recepttid
+    float: left;
+    span {
+        font-weight: bold;
+    }
+}
+.portions { // Div med portionsinfo
+    float: right;
+    span {
+        font-weight: bold;
+    }
+}
+//Sidfot
+footer {
+    background-color: black;
+    padding: 20px 0;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    p {
+        color: white;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    @include mediaQueries(760px) { //Regler för mobilskärmar
+        
+    }
+}
+
+// Recept-sida
+#recipepage {
+    background-image: url("../pics/background3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    .recipecontainer {
+        max-width: 900px;
+        width: 80%;
+        margin: 100px auto 0 auto;
+        h1 {
+            text-align: center;
+        }
+        .recipewrapper {
+            width: 88%;
+            padding: 6% 6% 2% 6%;
+            background-color: white;
+            margin: 50px 0 30px 0;
+            .recipes {
+                border: 4px solid black;
+                padding: 5%;
+                width: 88.5%;
+                margin-bottom: 30px;
+                overflow: auto;
+                img {
+                    width: 100%;
+                    height: auto;
+                    margin: 20px 0;
+                }
+                @extend %margins;
+                h2 {
+                    text-align: center;
+                }
+                .ingredientsbox2 {
+                    float: left;
+                    width: 40%;
+                    clear: both;
+                    margin-top: 20px;
+                    ul {
+                        margin-left: 15px;
+                    }
+                }
+                .instructionbox2 {
+                    float: right;
+                    width: 58%;
+                    margin-top: 20px;
+                }
+                .portions {
+                    float: left;
+                    margin-left: 38px;
+                }
+                @include mediaQueries(970px, 761px) { //Regler för tabletskärmar
+                    img {
+                        margin: 0 0 20px 0;
+                    }
+                    h3 {
+                        margin-bottom: 10px;
+                    }
+                    .ingredientsbox2, .instructionbox2 {
+                        margin-top: 0;
+                    }
+                }
+                @include mediaQueries(760px) { //Regler för mobilskärmar
+                    img {
+                        margin: 0 0 20px 0;
+                    }
+                    h3 {
+                        margin-bottom: 10px;
+                        margin-top: 20px;
+                    }
+                    .ingredientsbox2, .instructionbox2 {
+                        margin-top: 0;
+                        float: none;
+                        width: 97%;
+                    }
+                    .instructionbox2 {
+                        margin-left: 15px;
+                    }
+                }
+            }
+        }
+        @include mediaQueries(760px) { //Regler för mobilskärmar
+            margin-top: 140px;
+            width: 95%;
+        }
+    }
+}
+

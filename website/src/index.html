@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Emmas kök</title>
+    <meta name="description" content="Recept till alla tillfällen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Utvecklingsversion -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- Produktionsversion -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <div id="app">
+        <header id="header">
+            <div id="logo"><a href="index.html"><img src="pics/logo.svg" alt="logo"  /></a></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="recept.html">Recept</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="startcontainer"> <!-- Startsektionen -->
+            <h1>För alla smaker</h1>
+            <p>Här presenteras nya inspirerande recept för alla tillfällen.<br />På Recept-sidan finns alla recept samlade.</p>
+            <a href="recept.html">Till alla recept</a>
+        </div>
+        <div class="about"> <!-- Om oss-sektionen -->
+            <h2>Om oss</h2>
+            <p>
+                Text om webbplatsen.
+            </p>
+        </div>
+        <div class="latest"> <!-- Sektionen för de senaste recepten -->
+            <h2>Senaste recepten</h2>
+            <!-- Hämtar alla recept i arrayen som Vue-metoden startrecipes returnerar 
+                och skriver ut varje recept i en egen div-box -->
+            <div v-for="x in startrecipes" class="latestrecipe" v-bind:id="x._id">
+                <h3>{{x.recipeName}}</h3>
+                <img v-bind:src="x.image" />
+                <p class="time"><span>Tid:</span> {{x.time}} minuter</p>
+                <p class="portions"><span>Portioner:</span> {{x.portions}}</p>
+                <div class="ingredientsbox">
+                    <ul>
+                        <!-- Skriver ut elememten i ingrediens-arrayen i listelement -->
+                        <li v-for="ing in x.ingredients">{{ing}}</li>
+                    </ul>
+                </div>
+                <div class="instructionbox">
+                    <ol>
+                        <!-- Skriver ut elememten i instruktion-arrayen i listelement -->
+                        <li v-for="ins in x.instruction">{{ins}}</li>
+                    </ol>
+                </div>
+                <p v-bind:class="x._id" class="readmore" v-on:click="readMore">Läs mer</p>
+            </div>
+            <div class="button"><div><a href="recept.html">Till alla recept</a></div></div>
+        </div>
+        
+        <footer> <!-- Sidfot -->
+            <p id="copyright">Copyright {{date}} Emmas kök</p>
+        </footer>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

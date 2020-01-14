@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Emmas kök</title>
+    <meta name="description" content="Recept till alla tillfällen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body id="recipepage">
+    <!-- Utvecklingsversion -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- Produktionsversion -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <div id="app">
+        <header id="header">
+            <div id="logo"><a href="index.html"><img src="pics/logo.svg" alt="logo" /></a></div id="logo">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="recept.html">Recept</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="recipecontainer"> <!-- Sektion för alla recept -->
+            <h1>Recept</h1>
+            <div class="recipewrapper">
+                <!-- Varje recept i recipes-arrayen skrivs ut i en egen div-box -->
+                <div v-for="x in recipes" class="recipes" v-bind:id="x._id">
+                    <h2>{{x.recipeName}}</h2>
+                    <img v-bind:src="x.image" />
+                    <p class="time"><span>Tid:</span> {{x.time}} minuter</p>
+                    <p class="portions"><span>Portioner:</span> {{x.portions}}</p>
+                    <div class="ingredientsbox2">
+                        <ul>
+                            <!-- Skriver ut elememten i ingrediens-arrayen i listelement -->
+                            <li v-for="ing in x.ingredients">{{ing}}</li>
+                        </ul>
+                    </div>
+                    <div class="instructionbox2">
+                        <h3>Gör så här:</h3>
+                        <ol>
+                            <!-- Skriver ut elememten i instruktion-arrayen i listelement -->
+                            <li v-for="ins in x.instruction">{{ins}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer> <!-- Sidfot -->
+            <p id="copyright">Copyright {{date}} Emmas kök</p>
+        </footer>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv-SE">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Emmas kök Login Admin</title>
+    <meta name="description" content="Logga in." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+</head>
+<body>
+    <!-- Utvecklingsversion -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Produktionsversion -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <div id="logo"><img src="images/logo.svg" /></div>
+    <div id="login">
+        <h1>Logga in</h1>
+        <form>
+            <input type="text" v-model="input_username" />
+            <input type="password" v-model="input_password" v-on:change="getData" />
+            <button type="button" v-on:click="log_in">Logga in</button>
+        </form>
+        <p class="message">{{message}}</p>
+    </div>
+   <script src="login.js"></script>
+</body>
+</html>
