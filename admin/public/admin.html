@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <div id="app">
         <button type="button" v-on:click="logout" id="logoutBtn">Logga ut</button>
-        <div id="logo"><img src="images/logo.svg" /></div>
+        <div id="logo"><img src="images/logo.svg" alt="logo" /></div>
 
         <div id="addBox">
             <h2>Lägg till recept</h2>
@@ -25,7 +25,7 @@
                     <label>Receptnamn<input type="text" v-model="new_recipename" /></label>
                     <label>Tid<input type="number" v-model="new_time" /></label>
                     <label>Portioner<input type="number" v-model="new_portions" /></label>
-                    <label>Bildlänk<input type="text" v-model="new_image" /></td></label>
+                    <label>Bildlänk<input type="text" v-model="new_image" /></label>
                 </div>
                 <div>
                     <label>Ingredienser <span><br />(Skriv varje ingrediens på ny rad)</span><textarea v-model="new_ingredients"></textarea></label>
@@ -43,7 +43,7 @@
                     <label>Receptnamn<input type="text" v-model="recipe.recipeName" /></label>
                     <label>Tid<input type="number" v-model.number="recipe.time" /></label>
                     <label>Portioner<input type="number" v-model.number="recipe.portions" /></label>
-                    <label>Bildlänk<br /><input type="text" v-model="recipe.image" /><img v-bind:src="recipe.image" /></label>
+                    <label>Bildlänk<br /><input type="text" v-model="recipe.image" /><img v-bind:src="recipe.image" v-bind:alt="recipe.recipeName" /></label>
                 </div>
                 <div>
                     <label>Ingredienser<textarea v-model="recipe.ingredients"></textarea></label>

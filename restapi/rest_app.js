@@ -23,7 +23,7 @@ app.all('/api/*', function(req, res, next) {
 app.all('/login/*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://studenter.miun.se");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Methods", "POST");
     res.header("Content-Type: application/json; charset=UTF-8");
 	next();
 });
@@ -76,21 +76,25 @@ db.once('open', function (callback) {
         //Ny instans av Recipes
         let recipe = new Recipes();
 
-        //Skapa objekt
-        recipe.recipeName = req.body.recipeName;
-        recipe.ingredients = req.body.ingredients;
-        recipe.instruction = req.body.instruction;
-        recipe.time = req.body.time;
-        recipe.portions = req.body.portions;
-        recipe.image = req.body.image;
+        if(req.body.recipeName && req.body.ingredients && req.body.instruction && req.body.time && req.body.portions && req.body.image) {
+            //Skapa objekt
+            recipe.recipeName = req.body.recipeName;
+            recipe.ingredients = req.body.ingredients;
+            recipe.instruction = req.body.instruction;
+            recipe.time = req.body.time;
+            recipe.portions = req.body.portions;
+            recipe.image = req.body.image;
 
-        //Spara recept till databas och skriv ut ev. felmeddelanden
-        recipe.save(function(err) {
-            if(err) {
-                res.send(err);
-            }
-            res.json({message: "Recept tillagd"});
-        });
+            //Spara recept till databas och skriv ut ev. felmeddelanden
+            recipe.save(function(err) {
+                if(err) {
+                    res.send(err);
+                }
+                res.json({message: "Recept tillagd"});
+            });
+        } else {
+            res.json({message: "Inga värden"});
+        }
 
     });
 
@@ -140,8 +144,29 @@ db.once('open', function (callback) {
     // Logga in admin
     ////////////////////////////////////////////
 
+    // Kontrollera om korrekt användarnamn och lösen är angivet
+    app.post("/login/login", function(req, res) {
+
+        let username = req.body.username;
+        let password = req.body.password;
+
+        Admin.find({
+            username: username, 
+            password: password
+        },function(err, doc){
+            if(err) {
+                res.send(err);
+            } else if(doc.length === 0) {
+                res.json({message: "Fel_Login"});
+            } else {
+                res.json({message: "Inloggad"});
+            }
+        });
+
+    });
+
     // Metod GET - för att hämta inloggningsuppgifter
-    app.get("/login/get", function(req, res) {
+    /* app.get("/login/get", function(req, res) {
         
         Admin.find(function(err, Admin){
             if(err) {
@@ -149,7 +174,7 @@ db.once('open', function (callback) {
             }
             res.json(Admin);
         });
-    });
+    }); */
 
     //Metod PUT - Uppdatera användarnamn och lösenord
     app.put("/login/update/:id", function(req, res) {
@@ -175,15 +200,15 @@ db.once('open', function (callback) {
         }
     });
     // Lägga till admin
-    /* app.post("/login/add", function(req, res) {
-        //Ny instans av Recipes
+    app.post("/login/add", function(req, res) {
+        //Ny instans av Admin-objekt
         let admin = new Admin();
 
         //Skapa objekt
         admin.username = req.body.username;
         admin.password = req.body.password;
 
-        //Spara recept till databas och skriv ut ev. felmeddelanden
+        //Spara admin-inlogg till databas och skriv ut ev. felmeddelanden
         admin.save(function(err) {
             if(err) {
                 res.send(err);
@@ -191,7 +216,20 @@ db.once('open', function (callback) {
             res.json({message: "Admin tillagd"});
         });
 
-    }); */
+    });
+    //Metod DELETE - Ta bort inloggningsuppgifter
+    app.delete("/login/delete/:id", function(req, res) {
+        //Lagra det id-värde som skickats med i url:en i variabeln id
+        let id = req.params.id;
+        Admin.deleteOne({
+            _id: id
+        }, function(err, Admin) {
+            if(err) {
+                res.send(err);
+            }
+            res.json({message: "Inlogg-uppgifter raderade"});
+        });
+    });
 });
 
 

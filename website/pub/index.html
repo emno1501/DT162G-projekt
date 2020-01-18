@@ -34,7 +34,7 @@
         <div class="about"> <!-- Om oss-sektionen -->
             <h2>Om oss</h2>
             <p>
-                Text om webbplatsen.
+                Hej och välkommen till receptsajten Emmas kök! Här publiceras recept av olika slag för alla tillfällen. Recept ser jag som inspiration och vill med mina egna idéer inspirera fler att våga sig in i köket. Min filosofi är att det ska vara enkelt och roligt att laga mat, och förstås gott att äta.
             </p>
         </div>
         <div class="latest"> <!-- Sektionen för de senaste recepten -->
@@ -43,7 +43,7 @@
                 och skriver ut varje recept i en egen div-box -->
             <div v-for="x in startrecipes" class="latestrecipe" v-bind:id="x._id">
                 <h3>{{x.recipeName}}</h3>
-                <img v-bind:src="x.image" />
+                <img v-bind:src="x.image" v-bind:alt="x.recipeName" />
                 <p class="time"><span>Tid:</span> {{x.time}} minuter</p>
                 <p class="portions"><span>Portioner:</span> {{x.portions}}</p>
                 <div class="ingredientsbox">
@@ -62,7 +62,12 @@
             </div>
             <div class="button"><div><a href="recept.html">Till alla recept</a></div></div>
         </div>
-        
+        <div class="contact"><!-- Kontaktsektion -->
+            <h2>Kontakt</h2>
+            <p>
+                Kontakta oss på <a href="mailto:kontakt@emmaskok.com" target="_blank">kontakt@emmaskok.com</a>
+            </p>
+        </div>
         <footer> <!-- Sidfot -->
             <p id="copyright">Copyright {{date}} Emmas kök</p>
         </footer>

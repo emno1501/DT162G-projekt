@@ -93,7 +93,7 @@ nav { //Huvudmeny
     }
 }
 // Om oss-sektionen
-.about {
+.about, .contact {
     width: 100%;
     padding: 80px 0;
     text-align: center;
@@ -109,6 +109,15 @@ nav { //Huvudmeny
         }
     }
 }
+.contact {
+    background-color: darken($my-pink, 10);
+    a {
+        color: black;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+}
 // Sektion för senaste recepten
 .latest {
     width: 80%;
@@ -121,7 +130,7 @@ nav { //Huvudmeny
         margin-bottom: 50px;
     }
     .latestrecipe {
-        max-width: 35.2%;
+        max-width: 34.8%;
         border: 4px solid black;
         padding: 3% 3% 65px 3%;
         float: left;
@@ -178,7 +187,7 @@ nav { //Huvudmeny
         position: absolute;
         bottom: 60px;
         div {
-            width: 151px;
+            width: 152px;
             margin: 0 auto;
         }
     }
@@ -215,9 +224,6 @@ footer {
         color: white;
         text-align: center;
         font-size: 1.2rem;
-    }
-    @include mediaQueries(760px) { //Regler för mobilskärmar
-        
     }
 }
 
@@ -298,6 +304,9 @@ footer {
                     }
                     .instructionbox2 {
                         margin-left: 15px;
+                    }
+                    .ingredientsbox2 {
+                        columns: 2;
                     }
                 }
             }

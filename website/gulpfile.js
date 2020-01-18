@@ -3,7 +3,6 @@
 const { src, dest, watch, series, parallel } = require("gulp");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify-es").default;
-const imageMin = require("gulp-imagemin");
 const browserSync = require("browser-sync").create();
 const sass = require("gulp-sass");
 sass.compiler = require("node-sass");
@@ -51,7 +50,6 @@ function scssTask() {
 //Task: Kopiera och minifiera bilder
 function imageTask() {
     return src(files.imagePath)
-        //.pipe(imageMin())
         .pipe(dest("pub/pics"))
         .pipe(browserSync.stream())
 }
