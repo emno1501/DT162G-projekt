@@ -40,22 +40,27 @@ let app = new Vue({
             
         },
         del: function(id) { // Ta bort recept
-            fetch(url+"/delete/" + id, { //Lägger till IDt som skickades med som argument till url:en
-                method: "DELETE",
-            })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
-            let found = -1;
-            // Ta bort receptet ur recipeList-arrayen för att se aktuell receptlista utan att behöva ladda om sidan
-            for (let i = 0; i < this.recipeList.length; i++) {
-                if(id == this.recipeList[i]._id) {
-                    found = i;
-                    if (found != -1) {
-                        this.recipeList.splice(found, 1);
+            if(!id) {
+                alert("Ladda om sidan innan borttagning kan genomföras.");
+            } else {
+                fetch(url+"/delete/" + id, { //Lägger till IDt som skickades med som argument till url:en
+                    method: "DELETE",
+                })
+                .then((res) => res.json())
+                .then((data) => console.log(data))
+                .catch((err) => console.log(err));
+                let found = -1;
+                // Ta bort receptet ur recipeList-arrayen för att se aktuell receptlista utan att behöva ladda om sidan
+                for (let i = 0; i < this.recipeList.length; i++) {
+                    if(id == this.recipeList[i]._id) {
+                        found = i;
+                        if (found != -1) {
+                            this.recipeList.splice(found, 1);
+                        }
                     }
                 }
             }
+            
         },
         add: function(event) { // Lägg till nytt recept
             let new_ingredients = this.new_ingredients.split("\n"); // Gör array av ingrediens-textsträng
@@ -86,6 +91,7 @@ let app = new Vue({
             this.recipeList.unshift(ob); // Lägg till objektet först i arrayen med resterande recept för att se det tillagda receptet utan att behöva ladda om sida
             // Töm inputfälten i lägg till-formuläret
             this.new_recipename = this.new_ingredients = this.new_instruction = this.new_time = this.new_portions = this.new_image = "";
+            
         },
         upd: function(event) { // Uppdatera recept
             
@@ -102,16 +108,20 @@ let app = new Vue({
             ob.image = updValueArr[5];
 
             let jsonStr = JSON.stringify(ob); // KOnvertera objektet till JSON
-            fetch(url+"/update/" + event.target.id, { //Lägger till IDt till url:en
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: jsonStr // Skicka med JSON-strängen i anropet
-            })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
+            if(!event.target.id) {
+                alert("Ladda om sidan innan uppdatering kan genomföras.");
+            } else {
+                fetch(url+"/update/" + event.target.id, { //Lägger till IDt till url:en
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: jsonStr // Skicka med JSON-strängen i anropet
+                })
+                .then((res) => res.json())
+                .then((data) => console.log(data))
+                .catch((err) => console.log(err))
+            }
         },
         logout: function(event) { // Loggar ut admin när denne klickar på logga ut-knappen
             localStorage.clear(); // Tar bort lagrat värde som bekräftar inloggning i localStorage

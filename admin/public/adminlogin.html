@@ -19,8 +19,8 @@
     <div id="login">
         <h1>Logga in</h1>
         <form> <!-- Formulär med fält för att logga in till admin-gränssnittet -->
-            <input type="text" v-model="input_username" />
-            <input type="password" v-model="input_password" />
+            <input type="text" v-model="input_username" placeholder="Användarnamn" />
+            <input type="password" v-model="input_password" placeholder="Lösenord" />
             <button type="button" v-on:click="log_in">Logga in</button>
         </form>
         <p class="message">{{message}}</p> <!-- Felmeddelanden skrivs ut i denna -->
