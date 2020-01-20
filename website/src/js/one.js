@@ -16,8 +16,8 @@ let app = new Vue({
     computed: {
         // Funktion som kortar av arrayen med recept till fyra recept och returnerar dessa
         startrecipes: function() {
-            this.recipes.slice(0, 4);
-            return this.recipes;
+            let newRecipeArr = this.recipes.slice(0, 4);
+            return newRecipeArr;
         }
     },
     methods: {
